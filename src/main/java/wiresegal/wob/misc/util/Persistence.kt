@@ -11,8 +11,7 @@ import java.io.File
  * Created at 10:38 PM on 2/15/18.
  */
 fun fileInHome(name: String): File {
-    val home = System.getProperty("user.home")
-    return File(home, ".$name")
+    return File(".$name")
 }
 
 class FakeEmbedBuilder(val json: ObjectNode) : EmbedBuilder() {
@@ -27,8 +26,11 @@ class FakeEmbedBuilder(val json: ObjectNode) : EmbedBuilder() {
     }
 }
 
-open class SavedMap(val location: File, val loadLimit: Int = -1, private val backingMap: MutableMap<String, String> = mutableMapOf()) :
-        MutableMap<String, String> by backingMap {
+open class SavedMap(
+    val location: File,
+    val loadLimit: Int = -1,
+    private val backingMap: MutableMap<String, String> = mutableMapOf()
+) : MutableMap<String, String> by backingMap {
 
     private var lock = Any()
 
